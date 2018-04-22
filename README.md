@@ -1,6 +1,6 @@
 
 
-https://developers.google.com/places/web-service/search
+- get google places key - https://developers.google.com/places/web-service/search
 
 ```bash
 curl --request GET "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=47.626596,-122.352569&radius=1500&type=cafe&keyword=coffee&key=<KEY>"

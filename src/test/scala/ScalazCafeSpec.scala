@@ -1,28 +1,18 @@
 import com.softwaremill.sttp.{Response, SttpBackend, sttp}
 import org.scalatest.{FunSuite, Matchers}
-
 import com.softwaremill.sttp._
 
 import scalaz.concurrent.Task
-import argonaut._, Argonaut._
+import argonaut._
+import Argonaut._
+import places.{Place, PlaceResponse}
 
 class ScalazCafeSpec extends FunSuite with Matchers {
 
   val ApiKey = "<KEY>"
 
-  case class PlaceResponse(results: List[Place])
-
-  case class Place(id: String,
-                   name: String,
-                   price_level: Option[Int],
-                   rating: Float,
-                   vicinity: String,
-                   types: List[String])
-
-  implicit def PlaceCodecJson: CodecJson[Place] =
-    casecodec6(Place.apply, Place.unapply)("id", "name", "price_level", "rating", "vicinity", "types")
-
-  implicit def PlaceResponseJson: CodecJson[PlaceResponse] = casecodec1(PlaceResponse.apply, PlaceResponse.unapply)("results")
+  import Place._
+  import PlaceResponse._
 
   test("deserialise") {
     val serialisedString =
